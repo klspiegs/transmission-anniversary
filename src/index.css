@@ -33,11 +33,13 @@ body::before {
 
 .home {
   min-height: 100vh;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding: 35px;
 }
   
 .home-content {
@@ -78,5 +80,32 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .cascade {
     animation: none;
+  }
+}
+
+.buy-tickets {
+  margin-top: 60px;
+  p {
+    margin: 0;
+    font-size: 12px;
+  }
+}
+
+.promo-hint {
+  display: inline-block;
+  margin: 12px 0 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(238, 143, 173, 1) 0%,
+    rgba(252, 235, 126, 1) 100%
+  );
+}
+
+.footer {
+  margin-top: 20px;
+  a {
+    text-decoration: underline;
   }
 }

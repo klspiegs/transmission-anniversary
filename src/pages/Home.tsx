@@ -3,6 +3,7 @@ import { topGenresForNight } from '../data/artists'
 import type { Night } from '../data/artists'
 import { genreColor } from '../data/genres'
 import styles from './Home.module.css'
+import instagramIcon from '../assets/instagram.svg'
 
 const NIGHTS: Night[] = ['friday', 'saturday', 'sunday']
 
@@ -12,7 +13,7 @@ function Home() {
       <div className="home-content cascade" style={{ animationDelay: '0ms' }}>
         <h1>transmission's first year anniversary</h1>
         <div>
-          <p>a celebration of music and community</p>
+          <p>a celebration of music and community from 10/2 - 10/4</p>
         </div>
         <div className="home-buttons">
           <Link to="/hiphop">
@@ -60,6 +61,15 @@ function Home() {
             </section>
           )
         })}
+      </div>
+      <div className='buy-tickets cascade'>
+        <a href="https://shotgun.live/en/festivals/broadcast-one-year-of-transmission" target="_blank" rel="noopener noreferrer">
+          <button type="button">buy tickets!!</button>
+        </a>
+        <p>HINT you can use code <span className="promo-hint">ANNI5KAT</span> for $5 off</p>
+      </div>
+      <div className='footer cascade'>
+        <p> and follow <a href="https://www.instagram.com/transmissiondc" target="_blank" rel="noopener noreferrer">@transmissiondc</a> and <a href="https://www.instagram.com/klspiegs" target="_blank" rel="noopener noreferrer">@klspiegs</a> (the dev) on instagram</p>
       </div>
     </main>
   )
