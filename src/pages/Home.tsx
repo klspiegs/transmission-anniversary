@@ -3,7 +3,6 @@ import { topGenresForNight } from '../data/artists'
 import type { Night } from '../data/artists'
 import { genreColor } from '../data/genres'
 import styles from './Home.module.css'
-import instagramIcon from '../assets/instagram.svg'
 
 const NIGHTS: Night[] = ['friday', 'saturday', 'sunday']
 
