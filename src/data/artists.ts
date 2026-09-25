@@ -1,7 +1,12 @@
+import houseOfJane from '../assets/houseofjane.jpg'
 import fridayCsv from './transmission anniversary info - just friday.csv?raw'
 import saturdayCsv from './transmission anniversary info - just saturday.csv?raw'
 import sundayCsv from './transmission anniversary info - just sunday.csv?raw'
 import { csvRecords } from './parseCsv'
+
+const LOCAL_IMAGES: Record<string, string> = {
+  'houseofjane.jpg': houseOfJane,
+}
 
 export type { Genre } from './genres'
 export { GENRE_COLORS, genreColor } from './genres'
@@ -103,6 +108,11 @@ function parseTrack(track: string) {
   }
 }
 
+function resolveImage(value: string) {
+  const file = value.split('/').pop() ?? value
+  return LOCAL_IMAGES[file] ?? value
+}
+
 function instagramFromRecord(record: Record<string, string>, night: Night) {
   const nightKey = Object.keys(record).find((key) => key.startsWith(night))
   return cleanUrl(nightKey ? record[nightKey] : '')
@@ -123,7 +133,7 @@ function artistsFromCsv(csv: string, night: Night): Artist[] {
         genres: parseGenres(record.genres ?? record.genre ?? ''),
         soundcloudEmbedUrl: parseTrack(record['example track'] ?? ''),
         instagramUrl: instagramFromRecord(record, night),
-        imageUrl: record.picture || record.pictures || '',
+        imageUrl: resolveImage(record.picture || record.pictures || ''),
         nights: [night],
       },
     ]
