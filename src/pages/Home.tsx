@@ -9,7 +9,6 @@ import styles from './Home.module.css'
 const NIGHTS: Night[] = ['friday', 'saturday', 'sunday']
 const FORWARD_DEG_PER_SEC = 360 / 24
 const REVERSE_DEG_PER_SEC = 360 / 3
-const TAP_MS = 180
 
 function canHover() {
   return window.matchMedia('(hover: hover) and (pointer: fine)').matches
@@ -19,8 +18,6 @@ function Record() {
   const imgRef = useRef<HTMLImageElement>(null)
   const reverseRef = useRef(false)
   const angleRef = useRef(0)
-  const downAtRef = useRef<number | null>(null)
-  const suppressClickRef = useRef(false)
 
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -66,35 +63,21 @@ function Record() {
         }
       }}
       onPointerDown={() => {
-        if (canHover()) {
-          return
+        if (!canHover()) {
+          reverseRef.current = true
         }
-        suppressClickRef.current = false
-        downAtRef.current = performance.now()
-        reverseRef.current = true
       }}
       onPointerUp={() => {
-        if (canHover()) {
-          return
+        if (!canHover()) {
+          reverseRef.current = false
         }
-        reverseRef.current = false
-        if (
-          downAtRef.current !== null &&
-          performance.now() - downAtRef.current > TAP_MS
-        ) {
-          suppressClickRef.current = true
-        }
-        downAtRef.current = null
       }}
       onPointerCancel={() => {
         reverseRef.current = false
-        suppressClickRef.current = true
-        downAtRef.current = null
       }}
       onClick={(event) => {
-        if (suppressClickRef.current) {
+        if (!canHover()) {
           event.preventDefault()
-          suppressClickRef.current = false
         }
       }}
       onContextMenu={(event) => {
