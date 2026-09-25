@@ -13,6 +13,10 @@ const SORT_GENRES = [
   'club',
   'hardcore',
   'dance',
+  'reggaeton',
+  'latin',
+  'afrobeats',
+  'tribal',
 ] as const
 
 function Electronic() {
